@@ -20,7 +20,7 @@ function App() {
           element={
             <PrivateRoute>
               <DashboardLayout>
-                <></>
+                <h1>Bienvenido al panel de QRs</h1>
               </DashboardLayout>
             </PrivateRoute>
           } 
