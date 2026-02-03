@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import api from '../api/axios';
 import type { LoginResponse } from '../types/auth';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
 
   const handleLogin = async (e: React.SubmitEvent) => {
     
@@ -16,10 +20,10 @@ const Login = () => {
       // Guardar token para futuras peticiones
       localStorage.setItem('auth_token', response.data.token);
       
-      alert('¡Bienvenido!');
+      navigate('/dashboard');
       // Aquí redirigirías al Dashboard
     } catch (error) {
-      alert('Error en las credenciales');
+      console.error('Error en las credenciales');
     }
 
   };
