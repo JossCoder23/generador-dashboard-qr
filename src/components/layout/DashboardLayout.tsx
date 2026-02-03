@@ -1,5 +1,6 @@
 // src/components/layout/DashboardLayout.tsx
 import type { ReactNode } from 'react';
+import './css/DashboardLayout.css';
 import Header from './Header';
 
 interface Props {
@@ -8,12 +9,12 @@ interface Props {
 
 const DashboardLayout = ({ children }: Props) => {
   return (
-    <>
+    <div className="data">
         <Header />
         <main>
             {children}
         </main>
-    </>
+    </div>
   );
 };
 
