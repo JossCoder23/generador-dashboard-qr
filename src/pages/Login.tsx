@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import api from '../api/axios';
-import type { LoginResponse } from '../types/auth';
 import { useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../store/useAuthStore';
 
 const Login = () => {
 
@@ -9,21 +9,23 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
+  const setAuth = useAuthStore((state) => state.setAuth);
 
   const handleLogin = async (e: React.SubmitEvent) => {
     
     e.preventDefault();
    
     try {
-      const response = await api.post<LoginResponse>('/login', { email, password });
-      
-      // Guardar token para futuras peticiones
-      localStorage.setItem('auth_token', response.data.token);
-      
+
+      const response = await api.post('/login', { email, password });
+      // Guardamos en el store global
+      setAuth(response.data.access_token, response.data.user); 
       navigate('/dashboard');
-      // Aquí redirigirías al Dashboard
+
     } catch (error) {
-      console.error('Error en las credenciales');
+
+      alert("Error de acceso");
+
     }
 
   };

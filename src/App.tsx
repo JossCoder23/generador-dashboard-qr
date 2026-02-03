@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import type { JSX } from 'react';
+import DashboardLayout from './components/layout/DashboardLayout';
 // import Dashboard from './pages/Dashboard'; // Lo crearás luego
 
 // Componente para proteger rutas
@@ -13,20 +14,17 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Ruta Pública */}
         <Route path="/login" element={<Login />} />
-
-        {/* Ruta Protegida: Solo entras si hay token */}
         <Route 
           path="/dashboard" 
           element={
             <PrivateRoute>
-              <div>Hola, este es tu Dashboard</div> 
+              <DashboardLayout>
+                <></>
+              </DashboardLayout>
             </PrivateRoute>
           } 
         />
-
-        {/* Redirección por defecto */}
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </Router>
