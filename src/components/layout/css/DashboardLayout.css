@@ -1,5 +1,48 @@
-.data {
-    height: 100vh;
+.layout-container {
+    height: 98.5vh;
     background-color: #a72642;
-    padding: 1rem 2rem;
+    padding: 1rem 2rem 0 2rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+}
+
+.layout-container main {
+    height: 69vh;
+    background-color: white;
+    border-radius: 2rem;
+    box-shadow: -1px -2px 45px -4px rgba(0,0,0,0.37);
+    -webkit-box-shadow: -1px -2px 45px -4px rgba(0,0,0,0.37);
+    -moz-box-shadow: -1px -2px 45px -4px rgba(0,0,0,0.37);
+    overflow: scroll;
+    overflow-y: auto; /* Solo permite scroll vertical */
+    overflow-x: hidden;
+    padding: 2rem;
+}
+
+.layout-container main::-webkit-scrollbar {
+    width: 6px; /* Ancho de la barra derecha muy delgado */
+}
+
+.layout-container main::-webkit-scrollbar-track {
+    background: transparent; /* Fondo de la barra invisible */
+}
+
+.layout-container main::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1); /* Color de la barra muy suave */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+.layout-container main::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary); /* Se pone granate/azul cuando pasas el mouse */
+}
+
+/* Para Firefox */
+.layout-container main {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
+}
+
+.layout-container main h1 {
+    margin: 0;
 }

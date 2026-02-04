@@ -2,15 +2,34 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './pages/Login';
 import type { JSX } from 'react';
 import DashboardLayout from './components/layout/DashboardLayout';
+import { useAuthStore } from './store/useAuthStore';
+import SuperAdminDashboard from './components/layout/SuperAdminDashboard';
+import AdminDashboard from './components/layout/AdminDashboard';
 // import Dashboard from './pages/Dashboard'; // Lo crearás luego
 
 // Componente para proteger rutas
 const PrivateRoute = ({ children }: { children: JSX.Element }) => {
   const token = localStorage.getItem('auth_token');
-  return token ? children : <Navigate to="/login" />;
+
+  // Si no hay token o no hay usuario cargado aún, redirigir
+  if (!token) return <Navigate to="/login" />;
+  
+  return children;
+};
+
+const DashboardHome = () => {
+  const { user } = useAuthStore();
+
+  if (user?.role === "superadmin") return <SuperAdminDashboard />; // Tu componente con la tabla de gestión
+  
+  if (user?.role === "admin") return <AdminDashboard />; // Tu componente con el generador de QRs
+  
+  return <h3>Cargando perfil institucional...</h3>;
+
 };
 
 function App() {
+
   return (
     <Router>
       <Routes>
@@ -20,7 +39,7 @@ function App() {
           element={
             <PrivateRoute>
               <DashboardLayout>
-                <h1>Bienvenido al panel de QRs</h1>
+                <DashboardHome />
               </DashboardLayout>
             </PrivateRoute>
           } 
