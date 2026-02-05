@@ -46,7 +46,7 @@ const SuperAdminDashboard = () => {
         </div>
         <div className="card-statistics">
           <section>
-            <span className="label">QR's por Sede:</span>
+            <span className="label">QR's por Área:</span>
           </section>
           <div className="sede-info">
             {stats.by_sede.map(sede => (
@@ -69,6 +69,10 @@ const SuperAdminDashboard = () => {
               </div>
           </div>
         </div>
+      </section>
+      <section className='content-data'>
+        <div className='data-users'>Usuarios</div>
+        <div className='data-charts'>Areas</div>
       </section>
     </div>
   );
